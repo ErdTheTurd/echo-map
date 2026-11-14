@@ -176,10 +176,7 @@ button:focus-visible,
   position: relative;
   overflow: hidden;
   color: var(--hero-text);
-  background:
-    radial-gradient(ellipse 70% 55% at 78% 18%, rgba(232, 165, 75, 0.28), transparent 58%),
-    radial-gradient(ellipse 55% 50% at 18% 78%, rgba(45, 212, 191, 0.22), transparent 55%),
-    linear-gradient(155deg, var(--ink-deep) 0%, #0c2740 42%, #0f4a52 78%, #0a3a44 100%);
+  background: linear-gradient(165deg, #0B1220 0%, #0F1E24 100%);
   padding: clamp(3.25rem, 8vw, 6.75rem) 0 clamp(4rem, 9vw, 7rem);
 }
 
@@ -190,106 +187,97 @@ button:focus-visible,
   overflow: hidden;
 }
 
-.hero-glow {
+.hero-falloff {
   position: absolute;
+  width: min(720px, 80vw);
+  height: min(720px, 80vw);
+  top: 8%;
+  right: 4%;
   border-radius: 50%;
-  filter: blur(60px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(160, 180, 200, 0.07) 0%,
+    rgba(160, 180, 200, 0.03) 42%,
+    transparent 70%
+  );
+  filter: blur(40px);
 }
 
-.hero-glow--amber {
-  width: min(520px, 70vw);
-  height: min(520px, 70vw);
-  top: -12%;
-  right: -6%;
-  background: rgba(245, 201, 122, 0.35);
-}
-
-.hero-glow--teal {
-  width: min(480px, 65vw);
-  height: min(480px, 65vw);
-  bottom: -18%;
-  left: -8%;
-  background: rgba(45, 212, 191, 0.22);
-}
-
-.sound-waves {
+.hero-plan {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.9;
 }
 
-.wave {
-  transform-origin: center;
+.hero-plan svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Approximate cover positioning toward the phone column */
+  transform: scale(1.05);
+  transform-origin: 62% 42%;
+}
+
+.hero-plan .ray {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.hero-plan.is-drawn .ray {
+  animation: hero-ray-draw 780ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hero-plan.is-drawn .ray--order1 {
+  animation-delay: 90ms;
+}
+
+.hero-plan.is-drawn .ray--order2 {
+  animation-delay: 180ms;
+}
+
+.hero-plan .bounce-ticks {
   opacity: 0;
-  animation: wave-pulse 10s ease-out infinite;
 }
 
-.wave--1 { animation-delay: 0s; }
-.wave--2 { animation-delay: 2s; }
-.wave--3 { animation-delay: 4s; }
-.wave--4 { animation-delay: 6s; }
-.wave--5 { animation-delay: 8s; }
-
-@keyframes wave-pulse {
-  0% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-  70% {
-    opacity: 0.12;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(8.5);
-  }
+.hero-plan.is-drawn .bounce-ticks {
+  animation: hero-tick-fade 600ms ease 420ms forwards;
 }
 
-.bounce {
-  stroke-dasharray: 280;
-  stroke-dashoffset: 280;
-  animation: bounce-draw 7s ease-in-out infinite;
-}
-
-.bounce--a { animation-delay: 0.4s; }
-.bounce--b { animation-delay: 1.8s; }
-.bounce--c { animation-delay: 3.2s; }
-
-@keyframes bounce-draw {
-  0%, 8% {
-    stroke-dashoffset: 280;
-    opacity: 0;
-  }
-  22% {
-    opacity: 0.45;
-  }
-  45% {
+@keyframes hero-ray-draw {
+  to {
     stroke-dashoffset: 0;
-    opacity: 0.4;
-  }
-  70%, 100% {
-    stroke-dashoffset: -40;
-    opacity: 0;
   }
 }
 
-.source-dot {
-  animation: source-breathe 3.2s ease-in-out infinite;
+@keyframes hero-tick-fade {
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes source-breathe {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.25); }
+.hero-plan.is-static .ray {
+  stroke-dashoffset: 0;
+}
+
+.hero-plan.is-static .bounce-ticks {
+  opacity: 1;
 }
 
 .hero-grid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 1fr);
-  gap: clamp(2.5rem, 6vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: clamp(2.75rem, 6vw, 4.75rem);
   align-items: center;
+}
+
+.hero-copy-block {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
 }
 
 .hero-icon {
@@ -315,14 +303,14 @@ button:focus-visible,
   font-weight: 400;
   letter-spacing: -0.022em;
   line-height: 1.28;
-  color: var(--hero-muted);
+  color: rgba(244, 247, 251, 0.88);
 }
 
 .hero-copy {
   margin: 0 0 1.7rem;
   max-width: 36em;
   font-size: 1.125rem;
-  color: var(--hero-muted);
+  color: rgba(244, 247, 251, 0.78);
 }
 
 .btn-store {
@@ -366,10 +354,10 @@ button:focus-visible,
   margin: 1.2rem 0 0;
   max-width: 34em;
   font-size: 0.92rem;
-  color: rgba(244, 247, 251, 0.58);
+  color: rgba(244, 247, 251, 0.65);
 }
 
-/* Phone frames */
+/* Phone frames — titanium bezel, Dynamic Island, side buttons */
 .phone {
   margin: 0;
   --tilt: 0deg;
@@ -380,37 +368,106 @@ button:focus-visible,
 }
 
 .phone-frame {
-  --bezel: 11px;
-  --radius: 42px;
+  --bezel: 10px;
+  --radius: 44px;
   width: min(100%, 260px);
   margin: 0 auto;
-  background: linear-gradient(160deg, #2a303a 0%, #0c1018 55%, #06080c 100%);
+  background:
+    linear-gradient(145deg, #3a3d42 0%, #1c1e22 28%, #0a0b0d 62%, #2a2c30 100%);
   border-radius: var(--radius);
   padding: var(--bezel);
   box-shadow:
-    var(--shadow),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 0 1px rgba(0, 0, 0, 0.35);
+    0 28px 56px rgba(0, 0, 0, 0.45),
+    0 10px 20px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.55) inset,
+    0 0 0 0.5px rgba(255, 255, 255, 0.08);
   position: relative;
+  isolation: isolate;
+}
+
+.phone-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(0, 0, 0, 0.35) 70%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .phone-frame--sm {
   width: min(100%, 230px);
-  --radius: 38px;
-  --bezel: 10px;
+  --radius: 40px;
+  --bezel: 9px;
 }
 
-.phone-notch {
+.phone-island {
   position: absolute;
-  top: calc(var(--bezel) + 8px);
+  top: calc(var(--bezel) + 9px);
   left: 50%;
   transform: translateX(-50%);
-  width: 28%;
-  height: 10px;
-  background: #05070b;
+  width: 32%;
+  max-width: 92px;
+  height: 22px;
+  background: #050505;
   border-radius: 999px;
   z-index: 2;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 0 0.5px rgba(0, 0, 0, 0.8);
+}
+
+.phone-btn {
+  position: absolute;
+  background: linear-gradient(90deg, #2c2e32, #1a1b1e 45%, #3a3c40);
+  border-radius: 2px;
+  z-index: 4;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.5);
+}
+
+.phone-btn--silent {
+  left: -2px;
+  top: 18%;
+  width: 2.5px;
+  height: 4.5%;
+}
+
+.phone-btn--vol-up {
+  left: -2px;
+  top: 26%;
+  width: 2.5px;
+  height: 7%;
+}
+
+.phone-btn--vol-down {
+  left: -2px;
+  top: 36%;
+  width: 2.5px;
+  height: 7%;
+}
+
+.phone-btn--power {
+  right: -2px;
+  top: 28%;
+  width: 2.5px;
+  height: 10%;
+  background: linear-gradient(90deg, #3a3c40, #1a1b1e 55%, #2c2e32);
 }
 
 .phone-frame img {
@@ -423,14 +480,24 @@ button:focus-visible,
 
 .phone-fan {
   position: relative;
-  min-height: 420px;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+  min-height: 440px;
   display: grid;
   place-items: center;
   perspective: 900px;
+  /* Clip fan so phones never spill into the copy column or past the viewport */
+  overflow: hidden;
+  padding: 1.5rem 2.75rem 2rem;
+  box-sizing: border-box;
 }
 
 .phone-fan .phone {
   position: absolute;
+  width: auto;
+  max-width: 44%;
   transform:
     translate(var(--fan-x), var(--fan-y))
     rotate(var(--tilt))
@@ -439,15 +506,18 @@ button:focus-visible,
   transition: transform 0.15s ease-out;
 }
 
-.phone-fan .phone--front .phone-frame {
-  width: min(100%, 250px);
+.phone-fan .phone--front {
+  max-width: 50%;
+}
+
+.phone-fan .phone .phone-frame {
+  width: 100%;
 }
 
 .phone-fan .phone--back .phone-frame,
 .phone-fan .phone--mid .phone-frame {
-  width: min(100%, 210px);
-  opacity: 0.92;
-  filter: saturate(0.95) brightness(0.96);
+  opacity: 0.94;
+  filter: saturate(0.96) brightness(0.97);
 }
 
 .phone--solo {
@@ -825,28 +895,37 @@ button:focus-visible,
     order: 2;
   }
 
+  .hero-copy-block {
+    max-width: none;
+  }
+
   .how-steps {
     grid-template-columns: 1fr;
   }
 
   .phone-fan {
-    min-height: 360px;
-    margin-top: 0.5rem;
+    min-height: 380px;
+    margin-top: 0.25rem;
+    max-width: 360px;
+    padding: 1rem 2rem 1.25rem;
   }
 
-  .phone-fan .phone--front .phone-frame {
-    width: min(100%, 220px);
+  .phone-fan .phone--back {
+    --fan-x: -26%;
   }
 
-  .phone-fan .phone--back .phone-frame,
-  .phone-fan .phone--mid .phone-frame {
-    width: min(100%, 180px);
+  .phone-fan .phone--mid {
+    --fan-x: 26%;
   }
 
   .hero-icon {
     width: 72px;
     height: 72px;
     border-radius: 16px;
+  }
+
+  .hero-plan svg {
+    transform-origin: 50% 40%;
   }
 }
 
@@ -856,24 +935,19 @@ button:focus-visible,
   }
 
   .phone-fan {
-    min-height: 320px;
+    min-height: 340px;
+    max-width: 300px;
+    padding: 0.75rem 1.75rem 1rem;
   }
 
   .phone-fan .phone--back {
-    --fan-x: -48%;
+    --fan-x: -24%;
+    --tilt: -8deg;
   }
 
   .phone-fan .phone--mid {
-    --fan-x: 42%;
-  }
-
-  .phone-fan .phone--front .phone-frame {
-    width: min(100%, 190px);
-  }
-
-  .phone-fan .phone--back .phone-frame,
-  .phone-fan .phone--mid .phone-frame {
-    width: min(100%, 155px);
+    --fan-x: 24%;
+    --tilt: 6deg;
   }
 }
 
@@ -882,32 +956,17 @@ button:focus-visible,
     scroll-behavior: auto;
   }
 
-  .wave,
-  .bounce,
-  .source-dot {
+  .hero-plan.is-drawn .ray,
+  .hero-plan.is-drawn .bounce-ticks {
     animation: none !important;
   }
 
-  .wave {
-    opacity: 0.22;
-    transform: scale(calc(1 + 1.6 * var(--i, 1)));
-  }
-
-  .wave--1 { --i: 1; }
-  .wave--2 { --i: 2; }
-  .wave--3 { --i: 3; }
-  .wave--4 { --i: 4; }
-  .wave--5 { --i: 5; }
-
-  .bounce {
-    stroke-dasharray: none;
+  .hero-plan .ray {
     stroke-dashoffset: 0;
-    opacity: 0.28;
   }
 
-  .source-dot {
-    opacity: 0.85;
-    transform: none;
+  .hero-plan .bounce-ticks {
+    opacity: 1;
   }
 
   .reveal {
