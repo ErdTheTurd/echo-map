@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#0a1628" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#060d18" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sonarlark">
   <meta property="og:title" content="Sonarlark">
@@ -34,6 +34,7 @@
         Sonarlark
       </a>
       <nav class="nav-links" aria-label="Primary">
+        <a href="#how">How it works</a>
         <a href="privacy.html">Privacy</a>
         <a href="support.html">Support</a>
       </nav>
@@ -41,95 +42,251 @@
   </header>
 
   <main id="main">
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-glow hero-glow--amber"></div>
+        <div class="hero-glow hero-glow--teal"></div>
+        <svg class="sound-waves" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <defs>
+            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5eead4" stop-opacity="0.55"/>
+              <stop offset="55%" stop-color="#38bdf8" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.18"/>
+            </linearGradient>
+          </defs>
+          <!-- Room walls suggestion -->
+          <rect class="room-wall" x="180" y="110" width="840" height="560" rx="8" fill="none" stroke="url(#waveGrad)" stroke-width="1.2" opacity="0.35"/>
+          <g class="wave-set" transform="translate(420 400)">
+            <circle class="wave wave--1" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.6"/>
+            <circle class="wave wave--2" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.4"/>
+            <circle class="wave wave--3" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.2"/>
+            <circle class="wave wave--4" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1"/>
+            <circle class="wave wave--5" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="0.8"/>
+            <circle class="source-dot" r="5" fill="#fbbf24" opacity="0.85"/>
+          </g>
+          <!-- Bounce arcs off walls -->
+          <path class="bounce bounce--a" d="M420 400 Q 180 280 240 160" fill="none" stroke="#5eead4" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+          <path class="bounce bounce--b" d="M420 400 Q 980 320 960 150" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+          <path class="bounce bounce--c" d="M420 400 Q 700 620 900 640" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+        </svg>
+      </div>
+
       <div class="wrap hero-grid">
-        <div>
+        <div class="hero-copy-block reveal">
           <img class="hero-icon" src="assets/icon-256.png" width="88" height="88" alt="Sonarlark app icon: a room outline with a sound source, a listener, and bounce arcs.">
-          <h1>Sonarlark</h1>
+          <h1 id="hero-title">Sonarlark</h1>
           <p class="lede">See how sound may bounce in a room you scan.</p>
           <p class="hero-copy">Scan the space with LiDAR, or open the built-in living room demo. Sonarlark traces estimated reflections, arrival times, and reverb time (RT60) from the room’s shape — not from a microphone.</p>
-          <a class="btn-store" href="#" aria-disabled="true">
+          <span class="btn-store" aria-disabled="true" role="text">
             <span class="btn-kicker">Coming soon</span>
             <span class="btn-label">App Store</span>
-          </a>
+          </span>
           <p class="note">Results are simulations based on room geometry. They are estimates, not acoustic measurements, and Sonarlark does not claim laboratory accuracy.</p>
         </div>
-        <figure class="device">
-          <picture>
-            <source type="image/webp" srcset="assets/results.webp">
-            <img src="assets/results.jpg" width="720" height="1565" alt="The Living Room Demo in Sonarlark, with estimated bounce paths drawn through a 3D room and arrival times along the bottom.">
-          </picture>
-        </figure>
+
+        <div class="phone-fan" data-parallax-group aria-hidden="false">
+          <figure class="phone phone--back" data-parallax data-depth="0.04" style="--tilt: -14deg; --fan-x: -72%; --fan-y: 8%; --z: 1;">
+            <div class="phone-frame">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <picture>
+                <source type="image/webp" srcset="assets/home.webp">
+                <img src="assets/home.jpg" width="720" height="1565" alt="The Sonarlark home screen, with a note that LiDAR scanning needs a supported iPhone or iPad and a button to explore the demo room.">
+              </picture>
+            </div>
+          </figure>
+          <figure class="phone phone--mid" data-parallax data-depth="0.08" style="--tilt: 8deg; --fan-x: 58%; --fan-y: 12%; --z: 2;">
+            <div class="phone-frame">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <picture>
+                <source type="image/webp" srcset="assets/stats.webp">
+                <img src="assets/stats.jpg" width="720" height="1565" alt="The Room Stats sheet over the demo room, listing volume, surface area, mean absorption, and a reminder that the figures are geometric estimates.">
+              </picture>
+            </div>
+          </figure>
+          <figure class="phone phone--front" data-parallax data-depth="0.14" style="--tilt: -3deg; --fan-x: 0%; --fan-y: 0%; --z: 3;">
+            <div class="phone-frame">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <picture>
+                <source type="image/webp" srcset="assets/results.webp">
+                <img src="assets/results.jpg" width="720" height="1565" alt="The Living Room Demo in Sonarlark, with estimated bounce paths drawn through a 3D room and arrival times along the bottom.">
+              </picture>
+            </div>
+          </figure>
+        </div>
       </div>
     </section>
 
-    <section class="feature">
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2 id="how-title">How it works</h2>
+          <p>Three steps from empty space to estimated reflections — all on your device.</p>
+        </header>
+        <ol class="how-steps">
+          <li class="how-step reveal" style="--accent: var(--accent-scan);">
+            <div class="how-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+                <rect x="8" y="12" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 20h8M14 26h14M14 32h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="36" cy="14" r="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M36 11.5v5M33.5 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Scan</h3>
+            <p>Walk the room with LiDAR and RoomPlan, or open the built-in living room demo.</p>
+          </li>
+          <li class="how-step reveal" style="--accent: var(--accent-simulate);">
+            <div class="how-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+                <circle cx="16" cy="28" r="3" fill="currentColor"/>
+                <circle cx="34" cy="18" r="2.5" fill="currentColor" opacity="0.7"/>
+                <path d="M16 28 Q 22 12 34 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M16 28 Q 28 36 34 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.55"/>
+                <path d="M16 28 L 34 18" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.45"/>
+              </svg>
+            </div>
+            <h3>Simulate</h3>
+            <p>Place a source and listener. Paths and arrival times come from geometry and the speed of sound.</p>
+          </li>
+          <li class="how-step reveal" style="--accent: var(--accent-explore);">
+            <div class="how-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+                <rect x="10" y="10" width="28" height="28" rx="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M18 30c4-10 8-10 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <circle cx="24" cy="20" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Explore</h3>
+            <p>Compare heat spots, room stats, and material presets — labeled as estimates throughout.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="feature feature--scan" style="--section-accent: var(--accent-scan);">
       <div class="wrap feature-grid">
-        <div class="feature-copy">
+        <div class="feature-copy reveal">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+              <rect x="4" y="6" width="20" height="16" rx="2.5" stroke="currentColor" stroke-width="1.75"/>
+              <path d="M8 12h6M8 16h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <circle cx="20" cy="9" r="3.25" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </span>
           <h2>Start with the room’s shape</h2>
           <p>On an iPhone or iPad with LiDAR, walk the space and let RoomPlan pick up the walls, floor, ceiling, and furniture. That scan becomes the geometry the simulation runs on.</p>
           <p>If your device doesn’t have LiDAR, tap Explore Demo Room. You still get the same 3D view, paths, and estimates, using a built-in living room.</p>
         </div>
-        <figure class="device device--sm">
-          <picture>
-            <source type="image/webp" srcset="assets/home.webp">
-            <img src="assets/home.jpg" width="720" height="1565" alt="The Sonarlark home screen, with a note that LiDAR scanning needs a supported iPhone or iPad and a button to explore the demo room.">
-          </picture>
+        <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: 4deg;">
+          <div class="phone-frame phone-frame--sm">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <picture>
+              <source type="image/webp" srcset="assets/home.webp">
+              <img src="assets/home.jpg" width="720" height="1565" alt="The Sonarlark home screen, with a note that LiDAR scanning needs a supported iPhone or iPad and a button to explore the demo room.">
+            </picture>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="feature">
+    <section class="feature feature--bounce" style="--section-accent: var(--accent-simulate);">
       <div class="wrap feature-grid reverse">
-        <div class="feature-copy">
+        <div class="feature-copy reveal">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+              <circle cx="8" cy="18" r="2.25" fill="currentColor"/>
+              <circle cx="21" cy="9" r="2" fill="currentColor" opacity="0.75"/>
+              <path d="M8 18 Q 12 6 21 9" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+              <path d="M8 18 Q 16 22 21 9" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </span>
           <h2>Watch where a sound may bounce</h2>
           <p>Place a source and, if you want, a listener. Thin lines show the direct path and the first few reflections. Arrival times come from path length and the speed of sound, 343 meters per second.</p>
           <p>Heat spots mark where reflected energy may build up. They’re meant for comparing one place in the room with another — not as a calibrated sound-pressure reading.</p>
         </div>
-        <figure class="device">
-          <picture>
-            <source type="image/webp" srcset="assets/results-dark.webp">
-            <img src="assets/results-dark.jpg" width="720" height="1565" alt="The same living room demo in Dark Mode, with a source, a listener, and estimated first-bounce heat spots along a wall.">
-          </picture>
+        <figure class="phone phone--solo reveal" data-parallax data-depth="0.07" style="--tilt: -5deg;">
+          <div class="phone-frame">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <picture>
+              <source type="image/webp" srcset="assets/results-dark.webp">
+              <img src="assets/results-dark.jpg" width="720" height="1565" alt="The same living room demo in Dark Mode, with a source, a listener, and estimated first-bounce heat spots along a wall.">
+            </picture>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="feature">
+    <section class="feature feature--stats" style="--section-accent: var(--accent-stats);">
       <div class="wrap feature-grid">
-        <div class="feature-copy">
+        <div class="feature-copy reveal">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+              <rect x="4" y="5" width="20" height="18" rx="3" stroke="currentColor" stroke-width="1.75"/>
+              <path d="M8 18v-4M12 18V10M16 18v-6M20 18v-3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </span>
           <h2>Room stats, labeled as estimates</h2>
           <p>Volume, surface area, and RT60 estimates sit in a sheet over the room. RT60 uses the Sabine and Eyring formulas, with mid-band absorption from the materials you choose.</p>
           <p>Every results screen carries the same note: simulated from room geometry — not a measured reading.</p>
         </div>
-        <figure class="device device--sm">
-          <picture>
-            <source type="image/webp" srcset="assets/stats.webp">
-            <img src="assets/stats.jpg" width="720" height="1565" alt="The Room Stats sheet over the demo room, listing volume, surface area, mean absorption, and a reminder that the figures are geometric estimates.">
-          </picture>
+        <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: 3deg;">
+          <div class="phone-frame phone-frame--sm">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <picture>
+              <source type="image/webp" srcset="assets/stats.webp">
+              <img src="assets/stats.jpg" width="720" height="1565" alt="The Room Stats sheet over the demo room, listing volume, surface area, mean absorption, and a reminder that the figures are geometric estimates.">
+            </picture>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="feature">
+    <section class="feature feature--materials" style="--section-accent: var(--accent-materials);">
       <div class="wrap feature-grid reverse">
-        <div class="feature-copy">
+        <div class="feature-copy reveal">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+              <circle cx="10" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/>
+              <circle cx="18" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/>
+              <circle cx="14" cy="18" r="4" stroke="currentColor" stroke-width="1.75"/>
+            </svg>
+          </span>
           <h2>Change the materials, change the estimate</h2>
           <p>Walls start as painted drywall, the floor as hardwood, the ceiling as drywall, windows as glass, and furniture as upholstered. Each preset uses a typical published absorption value. Switch one, and the estimates update.</p>
         </div>
-        <figure class="device device--sm">
-          <picture>
-            <source type="image/webp" srcset="assets/settings.webp">
-            <img src="assets/settings.jpg" width="720" height="1565" alt="The Settings sheet for default materials, including painted drywall, hardwood floor, glass, and upholstered furniture, each with an absorption value.">
-          </picture>
+        <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: -4deg;">
+          <div class="phone-frame phone-frame--sm">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <picture>
+              <source type="image/webp" srcset="assets/settings.webp">
+              <img src="assets/settings.jpg" width="720" height="1565" alt="The Settings sheet for default materials, including painted drywall, hardwood floor, glass, and upholstered furniture, each with an absorption value.">
+            </picture>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="band">
-      <div class="wrap">
-        <h2>It stays on the iPhone</h2>
+    <section class="band band--dark reveal-group" aria-labelledby="privacy-band-title">
+      <div class="wrap band-inner reveal">
+        <span class="feature-icon feature-icon--on-dark" aria-hidden="true">
+          <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+            <path d="M14 4l8 3.5v6.2c0 5.1-3.4 9.8-8 11.3-4.6-1.5-8-6.2-8-11.3V7.5L14 4z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+            <path d="M11 14l2.2 2.2L17.5 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <h2 id="privacy-band-title">It stays on the iPhone</h2>
         <p>Sonarlark doesn’t create an account, doesn’t need a network connection for its features, and doesn’t collect data. The camera is used only while you scan a room. Geometry and your material settings stay on the device. Read the <a href="privacy.html">privacy policy</a>.</p>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap cta-inner reveal">
+        <h2 id="cta-title">Ready when you are</h2>
+        <p>Sonarlark is coming to the App Store. Until then, the estimates stay honest: geometry-based simulations, not measurements.</p>
+        <span class="btn-store btn-store--warm" aria-disabled="true" role="text">
+          <span class="btn-kicker">Coming soon</span>
+          <span class="btn-label">App Store</span>
+        </span>
       </div>
     </section>
   </main>
@@ -147,5 +304,7 @@
       <p class="footer-note">© 2026 Edward Dunn. Results shown in the app are simulations based on room geometry, not acoustic measurements.</p>
     </div>
   </footer>
+
+  <script src="main.js" defer></script>
 </body>
 </html>
