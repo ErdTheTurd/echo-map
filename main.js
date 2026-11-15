@@ -1,4 +1,4 @@
-/* Sonarlark site — scroll reveals + light parallax. Local only. */
+/* Sonarlark site — scroll reveals, parallax, hero plan draw-in. Local only. */
 (function () {
   "use strict";
 
@@ -67,13 +67,63 @@
     window.addEventListener("resize", onScroll, { passive: true });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      initReveals();
-      initParallax();
-    });
-  } else {
+  function initHeroPlan() {
+    var host = document.querySelector("[data-hero-plan]");
+    if (!host) return;
+
+    var src = host.getAttribute("data-hero-plan");
+    if (!src) return;
+
+    function finish(staticMode) {
+      host.classList.add(staticMode ? "is-static" : "is-drawn");
+    }
+
+    fetch(src)
+      .then(function (res) {
+        if (!res.ok) throw new Error("hero plan fetch failed");
+        return res.text();
+      })
+      .then(function (xml) {
+        host.innerHTML = xml;
+        var svg = host.querySelector("svg");
+        if (svg) {
+          svg.setAttribute("focusable", "false");
+          svg.removeAttribute("width");
+          svg.removeAttribute("height");
+        }
+        if (reduceMotion) {
+          finish(true);
+          return;
+        }
+        // Force layout, then draw once
+        void host.offsetWidth;
+        requestAnimationFrame(function () {
+          finish(false);
+        });
+      })
+      .catch(function () {
+        // Fallback: show as image if inline fetch fails (e.g. file://)
+        var img = document.createElement("img");
+        img.src = src;
+        img.width = 1200;
+        img.height = 800;
+        img.alt = "";
+        img.decoding = "async";
+        img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 42%;";
+        host.appendChild(img);
+        finish(true);
+      });
+  }
+
+  function boot() {
+    initHeroPlan();
     initReveals();
     initParallax();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
   }
 })();

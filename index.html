@@ -44,31 +44,8 @@
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true">
-        <div class="hero-glow hero-glow--amber"></div>
-        <div class="hero-glow hero-glow--teal"></div>
-        <svg class="sound-waves" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" focusable="false">
-          <defs>
-            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#5eead4" stop-opacity="0.55"/>
-              <stop offset="55%" stop-color="#38bdf8" stop-opacity="0.28"/>
-              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.18"/>
-            </linearGradient>
-          </defs>
-          <!-- Room walls suggestion -->
-          <rect class="room-wall" x="180" y="110" width="840" height="560" rx="8" fill="none" stroke="url(#waveGrad)" stroke-width="1.2" opacity="0.35"/>
-          <g class="wave-set" transform="translate(420 400)">
-            <circle class="wave wave--1" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.6"/>
-            <circle class="wave wave--2" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.4"/>
-            <circle class="wave wave--3" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1.2"/>
-            <circle class="wave wave--4" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="1"/>
-            <circle class="wave wave--5" r="28" fill="none" stroke="url(#waveGrad)" stroke-width="0.8"/>
-            <circle class="source-dot" r="5" fill="#fbbf24" opacity="0.85"/>
-          </g>
-          <!-- Bounce arcs off walls -->
-          <path class="bounce bounce--a" d="M420 400 Q 180 280 240 160" fill="none" stroke="#5eead4" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
-          <path class="bounce bounce--b" d="M420 400 Q 980 320 960 150" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
-          <path class="bounce bounce--c" d="M420 400 Q 700 620 900 640" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
-        </svg>
+        <div class="hero-falloff"></div>
+        <div class="hero-plan" data-hero-plan="assets/hero-plan.svg" aria-hidden="true"></div>
       </div>
 
       <div class="wrap hero-grid">
@@ -84,28 +61,40 @@
           <p class="note">Results are simulations based on room geometry. They are estimates, not acoustic measurements, and Sonarlark does not claim laboratory accuracy.</p>
         </div>
 
-        <div class="phone-fan" data-parallax-group aria-hidden="false">
-          <figure class="phone phone--back" data-parallax data-depth="0.04" style="--tilt: -14deg; --fan-x: -72%; --fan-y: 8%; --z: 1;">
+        <div class="phone-fan" data-parallax-group>
+          <figure class="phone phone--back" data-parallax data-depth="0.04" style="--tilt: -9deg; --fan-x: -28%; --fan-y: 10%; --z: 1;">
             <div class="phone-frame">
-              <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
               <picture>
                 <source type="image/webp" srcset="assets/home.webp">
                 <img src="assets/home.jpg" width="720" height="1565" alt="The Sonarlark home screen, with a note that LiDAR scanning needs a supported iPhone or iPad and a button to explore the demo room.">
               </picture>
             </div>
           </figure>
-          <figure class="phone phone--mid" data-parallax data-depth="0.08" style="--tilt: 8deg; --fan-x: 58%; --fan-y: 12%; --z: 2;">
+          <figure class="phone phone--mid" data-parallax data-depth="0.08" style="--tilt: 6deg; --fan-x: 30%; --fan-y: 14%; --z: 2;">
             <div class="phone-frame">
-              <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
               <picture>
                 <source type="image/webp" srcset="assets/stats.webp">
                 <img src="assets/stats.jpg" width="720" height="1565" alt="The Room Stats sheet over the demo room, listing volume, surface area, mean absorption, and a reminder that the figures are geometric estimates.">
               </picture>
             </div>
           </figure>
-          <figure class="phone phone--front" data-parallax data-depth="0.14" style="--tilt: -3deg; --fan-x: 0%; --fan-y: 0%; --z: 3;">
+          <figure class="phone phone--front" data-parallax data-depth="0.14" style="--tilt: -2deg; --fan-x: 0%; --fan-y: 0%; --z: 3;">
             <div class="phone-frame">
-              <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
               <picture>
                 <source type="image/webp" srcset="assets/results.webp">
                 <img src="assets/results.jpg" width="720" height="1565" alt="The Living Room Demo in Sonarlark, with estimated bounce paths drawn through a 3D room and arrival times along the bottom.">
@@ -179,7 +168,11 @@
         </div>
         <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: 4deg;">
           <div class="phone-frame phone-frame--sm">
-            <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
             <picture>
               <source type="image/webp" srcset="assets/home.webp">
               <img src="assets/home.jpg" width="720" height="1565" alt="The Sonarlark home screen, with a note that LiDAR scanning needs a supported iPhone or iPad and a button to explore the demo room.">
@@ -206,7 +199,11 @@
         </div>
         <figure class="phone phone--solo reveal" data-parallax data-depth="0.07" style="--tilt: -5deg;">
           <div class="phone-frame">
-            <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
             <picture>
               <source type="image/webp" srcset="assets/results-dark.webp">
               <img src="assets/results-dark.jpg" width="720" height="1565" alt="The same living room demo in Dark Mode, with a source, a listener, and estimated first-bounce heat spots along a wall.">
@@ -231,7 +228,11 @@
         </div>
         <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: 3deg;">
           <div class="phone-frame phone-frame--sm">
-            <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
             <picture>
               <source type="image/webp" srcset="assets/stats.webp">
               <img src="assets/stats.jpg" width="720" height="1565" alt="The Room Stats sheet over the demo room, listing volume, surface area, mean absorption, and a reminder that the figures are geometric estimates.">
@@ -256,7 +257,11 @@
         </div>
         <figure class="phone phone--solo reveal" data-parallax data-depth="0.06" style="--tilt: -4deg;">
           <div class="phone-frame phone-frame--sm">
-            <div class="phone-notch" aria-hidden="true"></div>
+              <span class="phone-btn phone-btn--silent" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-up" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--vol-down" aria-hidden="true"></span>
+              <span class="phone-btn phone-btn--power" aria-hidden="true"></span>
+              <div class="phone-island" aria-hidden="true"></div>
             <picture>
               <source type="image/webp" srcset="assets/settings.webp">
               <img src="assets/settings.jpg" width="720" height="1565" alt="The Settings sheet for default materials, including painted drywall, hardwood floor, glass, and upholstered furniture, each with an absorption value.">
